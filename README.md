@@ -7,3 +7,7 @@ Data is assumed to contain attributes with binary values and the output is also 
 
 ## Logistic Regression
 Logistic Regression algorithm (lr.py) used with feature engineering (feature.py). feature.py modifies the movie review (data) to a sparse representation using the dictionary provided. lr.py performs binary logistic regression on the formatted data and predicts positive or negative review for the test data. 
+
+## Neural Network
+
+Neural Network (with single hidden layer) implementation from scratch. Output size is assumed to be 10 (Implementation supports any number of output).
