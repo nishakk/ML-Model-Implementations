@@ -1,40 +1,9 @@
 import sys
 import numpy as np
-
-tags = []
-tagCount = {}
-wordsList = []
-def load_tags(filename):
-    with open(filename, 'rb') as f:
-        reader = f.readlines()
-        data = list(reader) 
     
-    for row in data:
-        info = row.split()
-        tags.append(info[0])
-        tagCount[info[0]] = 0
-        
-def load_words(filename):
-    with open(filename, 'rb') as f:
-        reader = f.readlines()
-        data = list(reader) 
-    
-    for row in data:
-        info = row.split()
-        wordsList.append(info[0])
-
-def load_train(filename):
-    with open(filename, 'rb') as f:
-        reader = f.readlines()
-        data = list(reader) 
-    return data
-    
+# Learn initialization probabilities
 def learn_prior(data):
-    x = 0
     for row in data:
-        if x == 10000:
-            break
-        x = x + 1
         if row.endswith("\n"):
             row = row[:-1]
         words = row.split(" ")
@@ -55,13 +24,10 @@ def learn_prior(data):
         priorTxt.write(str("{:.20E}".format(val)) + "\n")
     return pi
 
+# Learn transition probabilities
 def learn_trans(data):
-    x = 0
     trans = np.zeros([len(tags), len(tags)])
     for row in data:
-        if x == 10000:
-            break
-        x = x + 1
         if row.endswith("\n"):
             row = row[:-1]
         words = row.split(" ")
@@ -94,13 +60,10 @@ def learn_trans(data):
         transTxt.write("\n")
     return trans
     
+# Learn emission probabilities
 def learn_emit(data):
-    x = 0
     emit = np.zeros([len(tags), len(wordsList)], dtype = float)
     for row in data:
-        if x == 10000:
-            break
-        x = x + 1
         if row.endswith("\n"):
             row = row[:-1]
         wrds = row.split(" ")
@@ -125,6 +88,36 @@ def learn_emit(data):
             emitTxt.write(str("{:.20E}".format(emit[i][j])) + " ")
         emitTxt.write("\n")
     return emit
+
+
+# Loading initial data
+tags = []
+tagCount = {}
+wordsList = []
+def load_tags(filename):
+    with open(filename, 'rb') as f:
+        reader = f.readlines()
+        data = list(reader) 
+    
+    for row in data:
+        info = row.split()
+        tags.append(info[0])
+        tagCount[info[0]] = 0
+        
+def load_words(filename):
+    with open(filename, 'rb') as f:
+        reader = f.readlines()
+        data = list(reader) 
+    
+    for row in data:
+        info = row.split()
+        wordsList.append(info[0])
+
+def load_train(filename):
+    with open(filename, 'rb') as f:
+        reader = f.readlines()
+        data = list(reader) 
+    return data
 
 load_tags(sys.argv[3])
 data = load_train(sys.argv[1])
