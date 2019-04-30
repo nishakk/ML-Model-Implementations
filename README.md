@@ -15,3 +15,7 @@ Neural Network (with single hidden layer) implementation from scratch. Output si
 ## Hidden Markov Model
 
 Implemented HMM using Forward Backward Algorithm. learnhmm.py implements HMM parameters needed for estimation: initialization probabilities, transition probabilities and emission probabilities. forwardbackward.py implements Forward Backward Algorithm by recursively passing through "forward" and "backward" components. Finally the tags are assigned (labeling) using Minimum Bayes Predictor. Log-likelihood is calculated for each sequence and averaged out to get the overall log-likelihood of the data.
+
+## Reinforcement Learning: Q-Learning
+
+Implemented Q-learning on Mountain Car environment, with epsilon-greedy action selection to select the optimal action. To simplify the implementation, two modes are considered: raw, which is the discretization of the state space of Mountain Car, and tile, which is coarse-coding of the state space.
